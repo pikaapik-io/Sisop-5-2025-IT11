@@ -4,7 +4,23 @@
 int main() {
   clearScreen();
   shell();
+  haloin();
+
 }
+
+void haloin() {
+  char* str = "Halo";
+  int i = 0;
+
+  for (i = 0; i < 4; i++) {
+    char warna = 0x5;
+    putInMemory(0xB000, 0x8000 + i * 2, str[i]);
+    putInMemory(0xB000, 0x8001 + i * 2, warna);
+  }
+
+  while (1);
+}
+
 
 void printString(char *str)
 {
@@ -18,5 +34,9 @@ void readString(char *buf)
 
 void clearScreen()
 {
-  //TODO: Implementasi fungsi untuk membersihkan layar
+  int i;
+  for (i = 0; i < 80 * 25; i++) {
+    putInMemory(0xB000, i * 2, ' ');
+    putInMemory(0xB000, i * 2 + 1, 0x0); // Warna hitam
+  }
 }
