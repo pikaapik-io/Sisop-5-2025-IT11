@@ -4,39 +4,57 @@
 int main() {
   clearScreen();
   shell();
-  haloin();
-
 }
-
-void haloin() {
-  char* str = "Halo";
-  int i = 0;
-
-  for (i = 0; i < 4; i++) {
-    char warna = 0x5;
-    putInMemory(0xB000, 0x8000 + i * 2, str[i]);
-    putInMemory(0xB000, 0x8001 + i * 2, warna);
-  }
-
-  while (1);
-}
-
 
 void printString(char *str)
 {
-  //TODO: Implementasi fungsi untuk mencetak string
+  int i = 0;
+  while (str[i] != '\0') {
+    if (str[i] == '\n') {
+      // Move cursor to beginning of next line
+      interrupt(0x10, 0x0E00 + '\r', 0, 0, 0); // Carriage return
+      interrupt(0x10, 0x0E00 + '\n', 0, 0, 0); // Newline
+    } else {
+      interrupt(0x10, 0x0E00 + str[i], 0, 0, 0);
+      // set warna
+    }
+    i++;
+  }
 }
 
 void readString(char *buf)
 {
-  //TODO: Implementasi fungsi untuk membaca string
+  int i = 0;
+  char c;
+  do {
+    c = interrupt(0x16, 0, 0, 0, 0);
+    if (c == '\r') {
+      break;
+    } else if (c == '\b') {
+      if (i > 0) {
+        i--;
+        printString("\b \b");
+      }
+    } else {
+      buf[i++] = c;
+      interrupt(0x10, 0x0E00 + c, 0, 0, 0);
+    }
+  } while (i < 127);
+
+  buf[i] = '\0';
+  printString("\n");
 }
 
 void clearScreen()
 {
-  int i;
-  for (i = 0; i < 80 * 25; i++) {
-    putInMemory(0xB000, i * 2, ' ');
-    putInMemory(0xB000, i * 2 + 1, 0x0); // Warna hitam
+  int i, j;
+  for (i = 0; i < 25; i++) {
+    for (j = 0; j < 80; j++) {
+      interrupt(0x10, 0x0E00 + ' ', 0, 0, 0);
+    }
+    interrupt(0x10, 0x0E00 + '\n', 0, 0, 0);
   }
+  // move cursor to the top left corner
+  interrupt(0x10, 0x0002, 0, 0, 0);
 }
+
