@@ -1,10 +1,10 @@
-# Sisop-5-2025-IT-Template
+# Sisop-5-2025-IT11
 
 ## Kelompok
 
 Nama | NRP
 --- | ---
-Amoes Noland | 5027231028
+Erlinda Annisa Zahra Kusuma | 5027241108
 Muhammad Ardiansyah Tri Wibowo | 5027241091
 Fika Arka Nuriyah | 5027241071
 
