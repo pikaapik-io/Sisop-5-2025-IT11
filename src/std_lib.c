@@ -96,3 +96,9 @@ void itoa(int num, char *str) {
         str[i - j - 1] = temp;
     }
 }
+
+void sleep(unsigned int ticks)
+{
+  unsigned int start = getBiosTick();
+  while (getBiosTick() - start < ticks);
+}
