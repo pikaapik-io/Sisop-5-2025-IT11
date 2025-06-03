@@ -5,7 +5,7 @@
 Nama | NRP
 --- | ---
 Amoes Noland | 5027231028
-Rafi' Afnaan Fathurrahman | 5027231040
+Muhammad Ardiansyah Tri Wibowo | 5027241091
 Fika Arka Nuriyah | 5027241071
 
 ## Daftar Isi
