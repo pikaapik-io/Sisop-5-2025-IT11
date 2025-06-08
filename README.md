@@ -180,4 +180,76 @@ https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
 
 ## Laporan
 
-> Isi sesuai pengerjaan.
+# soal 1
+Mengimplementasikan fitur "The Echo" dalam shell, dimana setiap input dari user yang bukan command valid akan dicetak ulang oleh shell, seolah olah shell mengulang ucapan dari user
+
+      
+        } else {
+    printString(buf);
+    printString("\n");
+  }
+
+buf sebagai input utuh dari user. jika hasil cmd tidak cocok dengan command apapun (add,sum,dll) maka akan masuk kedalam kode tersebut. Disini shell langsung mencetak isi buf, sehingga seolah olah mengulang ucapan user.
+
+# soal 2
+Mengimplementasikan 2 command yaitu yo dan gurt dimana mereka akan saling membalas satu sama lain. jadi ketika mengetik yo akan dibalas dengan gurt berlaku dengan sebaliknya.
+
+        } else if (strcmp(cmd, "yo")){
+    printString("gurt\n");
+  } else if (strcmp(cmd, "gurt")){
+  printString("yo\n");
+  }
+
+# soal 3
+Membuat command user yang dapat digunakan untuk mengubah username shell, sehingga identitas pengguna dalam prompt dapat disesuaikan secara dinamis.
+
+          } else if (strcmp(cmd, "user")){
+          if (arg[0][0] != '\0') {
+        // set user to arg[0]
+        strcpy(user, arg[0]);
+        printString("User set to: ");
+        printString(user);
+        printString("\n");
+          } else {
+        // reset user ke default
+        strcpy(user, "user");
+        printString("User reset to default: ");
+        printString(user);
+        printString("\n");
+      }
+    }
+
+cmd akan berisi command utama (user). jika arg[0] akan berisi username baru jika ada, kalau kosong maka username akan dikembalikan ke default "user".
+
+# soal 4
+Membuat fitur grandcompany untuk mengatur warna teks terminal dan judul Grand Company pada prompt, sebagai bentuk afiliasi karakter dengan tiga kekuatan utama Eorzea. Juga menambahkan perintah clear untuk mengembalikan ke mode netral.
+
+
+           } else if (strcmp(cmd, "grandcompany")) {
+        if (strcmp(arg[0], "maelstrom") == 1) {
+          strcpy(companynyaweh, "@Storm~");
+          clearScreen();
+          interrupt(0x10, 0x0003, 0, 0, 0); // warna merah
+        } else if (strcmp(arg[0], "twinadder") == 1) {
+          strcpy(companynyaweh, "@Serpent~");
+          clearScreen();
+          interrupt(0x10, 0x0004, 0, 0, 0); // warna kuning
+        } else if (strcmp(arg[0], "immortalflames") == 1) {
+          strcpy(companynyaweh, "@Flame~");
+          clearScreen();
+          interrupt(0x10, 0x0005, 0, 0, 0); // warna biru
+        } else {
+          printString("Error: No Grand Company specified\n");
+        }
+      } else if (strcmp(cmd, "clear")) {
+        strcpy(companynyaweh, "@eorzeos~");
+        clearScreen();
+        interrupt(0x10, 0x0002, 0, 0, 0); // warna default
+      }
+
+
+# soal 5
+
+
+
+      
