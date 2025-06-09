@@ -298,7 +298,9 @@ Membuat command yogurt dalam shell yang memberikan respon acak dari karakter 'gu
 command yogurt akan memberikan salah satu dari 3 kemungkinan respon secara acak:
 
 > gurt> yo
+
 > gurt> ts unami gng </3
+
 > gurt> sygau
 
         } else if (strcmp(cmd, "yogurt")){
