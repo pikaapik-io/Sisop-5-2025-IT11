@@ -296,6 +296,7 @@ Membuat semacam sistem kalkulator berbasis perintah di dalam shell yang dapat me
 # soal 6
 Membuat command yogurt dalam shell yang memberikan respon acak dari karakter 'gurt' sebagai bentuk interaksi personal dan hiburan untuk user.
 command yogurt akan memberikan salah satu dari 3 kemungkinan respon secara acak:
+
 > gurt> yo
 > gurt> ts unami gng </3
 > gurt> sygau
@@ -319,6 +320,7 @@ command yogurt akan memberikan salah satu dari 3 kemungkinan respon secara acak:
 Untuk memahami dan menjelaskan isi makefile yang digunakan untuk menyusun komponen-komponen OS sederhana, mulai dari membuat image kosong, kompilasi bootloader dan kernel hingga linking menjadi image.img
 
 untuk membuat file kosong floppy.image menggunakan dd. file ini akan menjadi virtual floppy disk tempat OS akan ditulis.
+
     prepare:
     dd if=/dev/zero of=floppy.img bs=512 count=2880
 
