@@ -184,40 +184,40 @@ https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
 Mengimplementasikan fitur "The Echo" dalam shell, dimana setiap input dari user yang bukan command valid akan dicetak ulang oleh shell, seolah olah shell mengulang ucapan dari user
 
       
-        } else {
-    printString(buf);
-    printString("\n");
-  }
+            } else {
+        printString(buf);
+        printString("\n");
+      }
 
 buf sebagai input utuh dari user. jika hasil cmd tidak cocok dengan command apapun (add,sum,dll) maka akan masuk kedalam kode tersebut. Disini shell langsung mencetak isi buf, sehingga seolah olah mengulang ucapan user.
 
 # soal 2
 Mengimplementasikan 2 command yaitu yo dan gurt dimana mereka akan saling membalas satu sama lain. jadi ketika mengetik yo akan dibalas dengan gurt berlaku dengan sebaliknya.
 
-        } else if (strcmp(cmd, "yo")){
-    printString("gurt\n");
-  } else if (strcmp(cmd, "gurt")){
-  printString("yo\n");
-  }
+              } else if (strcmp(cmd, "yo")){
+          printString("gurt\n");
+        } else if (strcmp(cmd, "gurt")){
+        printString("yo\n");
+        }
 
 # soal 3
 Membuat command user yang dapat digunakan untuk mengubah username shell, sehingga identitas pengguna dalam prompt dapat disesuaikan secara dinamis.
 
-          } else if (strcmp(cmd, "user")){
-          if (arg[0][0] != '\0') {
-        // set user to arg[0]
-        strcpy(user, arg[0]);
-        printString("User set to: ");
-        printString(user);
-        printString("\n");
-          } else {
-        // reset user ke default
-        strcpy(user, "user");
-        printString("User reset to default: ");
-        printString(user);
-        printString("\n");
-      }
-    }
+              } else if (strcmp(cmd, "user")){
+              if (arg[0][0] != '\0') {
+            // set user to arg[0]
+            strcpy(user, arg[0]);
+            printString("User set to: ");
+            printString(user);
+            printString("\n");
+              } else {
+            // reset user ke default
+            strcpy(user, "user");
+            printString("User reset to default: ");
+            printString(user);
+            printString("\n");
+          }
+        }
 
 cmd akan berisi command utama (user). jika arg[0] akan berisi username baru jika ada, kalau kosong maka username akan dikembalikan ke default "user".
 
@@ -249,6 +249,78 @@ Membuat fitur grandcompany untuk mengatur warna teks terminal dan judul Grand Co
 
 
 # soal 5
+Membuat semacam sistem kalkulator berbasis perintah di dalam shell yang dapat melakukan operasi aritmatika dasar seperti penjumlahan, pengurangan,perkalian, dan pembagian.
+
+            } else if (strcmp(cmd, "add")) {
+        int x, y;
+        if (arg[0][0] != '\0' && arg[1][0] != '\0') {
+          x = atoi(arg[0]);
+          y = atoi(arg[1]);
+          printInt(x + y); printString("\n");
+        } else {
+          printString("Error: Invalid arguments\nUsage: add <x> <y>\n");
+        }
+      } else if (strcmp(cmd, "sub")) {
+        int x, y;
+        if (arg[0][0] != '\0' && arg[1][0] != '\0') {
+          x = atoi(arg[0]);
+          y = atoi(arg[1]);
+          printInt(x - y); printString("\n");
+        } else {
+          printString("Error: Invalid arguments\nUsage: sub <x> <y>\n");
+        }
+      } else if (strcmp(cmd, "mul")) {
+        int x, y;
+        if (arg[0][0] != '\0' && arg[1][0] != '\0') {
+          x = atoi(arg[0]);
+          y = atoi(arg[1]);
+          printInt(x * y); printString("\n");
+        } else {
+          printString("Error: Invalid arguments\nUsage: mul <x> <y>\n");
+        }
+      } else if (strcmp(cmd, "div")) {
+        int x, y;
+        if (arg[0][0] != '\0' && arg[1][0] != '\0') {
+          x = atoi(arg[0]);
+          y = atoi(arg[1]);
+          if (y != 0) {
+            printInt(div(x, y)); printString("\n");
+          } else {
+            printString("Error: Division by zero\n");
+          }
+        } else {
+          printString("Error: Invalid arguments\nUsage: div <x> <y>\n");
+        }
+      }
+
+# soal 6
+Membuat command yogurt dalam shell yang memberikan respon acak dari karakter 'gurt' sebagai bentuk interaksi personal dan hiburan untuk user.
+command yogurt akan memberikan salah satu dari 3 kemungkinan respon secara acak:
+> gurt> yo
+> gurt> ts unami gng </3
+> gurt> sygau
+
+        } else if (strcmp(cmd, "yogurt")){
+          int incrementcoi = 1;
+          int random = mod(getBiosTick(), incrementcoi + incrementcoi * 2); 
+          if (random == 0) {
+              printString("gurt> yo\n");
+              incrementcoi++;
+          } else if (random == 1) {
+              printString("gurt> ts unami gng </3\n");
+              incrementcoi++;
+          } else {
+              printString("gurt> sygau\n");
+              incrementcoi++;
+          }
+        }
+
+# soal 7
+Untuk memahami dan menjelaskan isi makefile yang digunakan untuk menyusun komponen-komponen OS sederhana, mulai dari membuat image kosong, kompilasi bootloader dan kernel hingga linking menjadi image.img
+
+untuk membuat file kosong floppy.image menggunakan dd. file ini akan menjadi virtual floppy disk tempat OS akan ditulis.
+    prepare:
+    dd if=/dev/zero of=floppy.img bs=512 count=2880
 
 
 
