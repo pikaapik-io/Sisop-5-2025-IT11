@@ -321,10 +321,42 @@ command yogurt akan memberikan salah satu dari 3 kemungkinan respon secara acak:
 # soal 7
 Untuk memahami dan menjelaskan isi makefile yang digunakan untuk menyusun komponen-komponen OS sederhana, mulai dari membuat image kosong, kompilasi bootloader dan kernel hingga linking menjadi image.img
 
-untuk membuat file kosong floppy.image menggunakan dd. file ini akan menjadi virtual floppy disk tempat OS akan ditulis.
+untuk membuat file kosong floppy.image menggunakan dd. file ini akan menjadi virtual floppy disk tempat OS akan ditulis:
 
     prepare:
     dd if=/dev/zero of=floppy.img bs=512 count=2880
+
+untuk mengcompile bootloader.asm menggunakan NASM ke format binary. Output: bin/bootloader.bin yang akan menjadi sektor pertama image (boot sector):
+
+    bootloader:
+    nasm -f bin bootloader.asm -o bin/bootloader.bin
+
+sebagai compile std_lib.c menjadi file object:
+
+    stdlib:
+        gcc -c src/std_lib.c -o bin/std_lib.o
+
+Compile file shell utama (fungsi-fungsi shell CLI) ke object file:
+
+    shell:
+        gcc -c src/shell.c -o bin/shell.o
+
+compile file kernel.asm menggunakan NASM ke format ELF. compile kernel.c ke object file. Jadi kernel terdiri dari 2 bagian yaitu ASM dan C:
+
+    kernel:
+        nasm -f elf src/kernel.asm -o bin/kernel_asm.o
+        gcc -c src/kernel.c -o bin/kernel.o
+
+Menggabungkan semua object file dan bootloader menjadi satu file bin/floppy.img. Ini akan menempatkan bootloader + kernel + library + shell ke dalam 1 image bootable:
+
+    link:
+        ld -m elf_i386 -o bin/floppy.img bin/bootloader.bin bin/kernel_asm.o bin/kernel.o           bin/std_lib.o bin/shell.o
+
+
+ini akan menjalankan semua targert di atas secara berurutan. jadi cukup dijalankan dengan make build:
+
+    build: prepare bootloader stdlib kernel shell link
+
 
 
 
